@@ -1,0 +1,9 @@
+[alias]
+  l = log --oneline --decorate --graph --all
+[user]
+  name = Author Name
+  email = author@emaildomain.com
+[credential]
+  helper = store
+[safe]
+  directory = /workspaces/JupyterNotebooks

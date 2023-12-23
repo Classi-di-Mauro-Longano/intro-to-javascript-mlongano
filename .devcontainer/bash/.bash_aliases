@@ -1,0 +1,1 @@
+alias l="lsd -1artF --group-directories-first --date '+%d/%m/%y %H:%M:%S' --blocks permission,user,date,name"

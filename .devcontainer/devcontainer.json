@@ -1,0 +1,43 @@
+{
+  "name": "Jupyter Notebook with javascript",
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "..",
+    "args": {
+      // Update 'VARIANT' to pick a Python version: 3, 3.8, 3.7, 3.6
+      "VARIANT": "3.12",
+      "JUPYTERLAB_PORT": "8889",
+      "NOTEBOOKS_DIR": "/notebooks"
+    }
+  },
+  "mounts": [
+    "source=${localWorkspaceFolder}/.devcontainer/bash/.bashrc,target=/root/.bashrc,type=bind,consistency=cached",
+    "source=${localWorkspaceFolder}/.devcontainer/bash/.bash_history,target=/root/.bash_history,type=bind,consistency=cached",
+    "source=${localWorkspaceFolder}/.devcontainer/bash/.bash_aliases,target=/root/.bash_aliases,type=bind,consistency=cached",
+    "source=${localWorkspaceFolder}/.devcontainer/bash/.bash_eternal_history,target=/root/.bash_eternal_history,type=bind,consistency=cached",
+    "source=${localWorkspaceFolder}/.devcontainer/bash/.bashrc.d,target=/root/.bashrc.d,type=bind,consistency=cached",
+    "source=${localWorkspaceFolder}/.devcontainer/.gitconfig,target=/root/.gitconfig,type=bind,consistency=cached"
+  ],
+  // Add the IDs of extensions you want installed when the container is created.
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-toolsai.jupyter",
+        // "denoland.vscode-deno",
+        "rajpurohit.google-search",
+        "mhutchie.git-graph"
+      ],
+      "settings": {
+        "terminal.integrated.shell.linux": "/bin/bash"
+      }
+    }
+  },
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  "workspaceFolder": "/notebooks",
+  "workspaceMount": "source=${localWorkspaceFolder},target=/notebooks,type=bind,consistency=cached",
+  // Use 'postCreateCommand' to run commands after the container is created.
+  "postCreateCommand": "jupyter lab --ip=0.0.0.0 --port=8888 --allow-root --NotebookApp.token='' --NotebookApp.password='' --notebook-dir=/notebooks"
+  // Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+  //"remoteUser": "jovyan"
+}
